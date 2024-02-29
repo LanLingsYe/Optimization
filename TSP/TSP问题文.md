@@ -56,9 +56,13 @@ $$
 $$
 \sum_{i,j\in S}x_{i,j}=\lvert S\lvert
 $$
-想要破除子环路，只需令
+对于$\lvert S\lvert$个顶点，形成回路至少要$\lvert S\lvert$条边，因此想要破除子环路，只需令
 $$
-\sum_{i,j\in S}x_{i,j}\le\lvert S\lvert-1\label{4}
+\sum_{i,j\in S}x_{i,j}\le\lvert S\lvert-1\label{4},2\le\lvert S\lvert\le\lvert V\lvert-1,S\subseteq V
+$$
+也可以使用使用等价描述为
+$$
+\sum_{i\in S,j\notin S}x_{i,j}\ge 1,2\le\lvert S\lvert\le\lvert V\lvert-1,S\subseteq V
 $$
 总的模型可以写成以下这种形式
 $$
@@ -107,7 +111,7 @@ $$
 s.t.\\
 &\sum_{i=1}^{N}x_{i,j}=1,j=1,2,\cdots,N\\
 &\sum_{j=1}^{N}x_{i,j}=1,i=1,2,\cdots,N\\
-&\mu_i-\mu_j+Nx_{i,j}\le N-1,1< i,j\le N\\
+&\mu_i-\mu_j+(N-1)x_{i,j}\le N-2,1< i,j\le N\\
 &x_{i,j}\in\{0,1\},\mu_1=1,\mu_i=2,\cdots,N\\
 \end{aligned}\end{equation}
 $$
@@ -161,7 +165,7 @@ $$
 |    Method     |  N   | Incumbent | BestBound | Gap% | Runtime(seconds) |
 | :-----------: | :--: | :-------: | :-------: | :--: | :--------------: |
 | DFJ_PlainLoop | 101  | 39240.39  | 39240.39  |  0   |      35.56       |
-|      MTZ      | 101  | 41765.64  | 38355.89  | 8.16 |      300.3       |
+|      MTZ      | 101  | 39240.39  | 38879.07  | 0.29 |      300.2       |
 |    SCM(GG)    | 101  | 39240.39  | 39240.39  |  0   |      18.86       |
 
 数据为算例2，GUROBI版本为11.0.0。
@@ -177,7 +181,7 @@ $$
 |    Method     |  N   | BestSolution | BestBound | Gap%  | Runtime(seconds) |
 | :-----------: | :--: | :----------: | :-------: | :---: | :--------------: |
 | DFJ_PlainLoop | 101  |   39240.39   | 39240.39  |   0   |      37.18       |
-|      MTZ      | 101  |   46033.4    | 38055.77  | 17.33 |      300.2       |
+|      MTZ      | 101  |   43882.16   | 38375.72  | 12.55 |      300.2       |
 |    SCM(GG)    | 101  |  232433.79   | 38762.55  | 83.3  |      300.3       |
 
 数据为算例2，COPT版本7.0.6。
@@ -192,7 +196,7 @@ $$
 
 ## 改良圈算法
 
-首先随机给定Hamilton 圈$C$， 然后适当修改$C$以得到具有较小权的另一个Hamilton圈，这种修改的方法叫做改良圈算法。
+又叫2-opt算法，首先随机给定Hamilton 圈$C$， 然后适当修改$C$以得到具有较小权的另一个Hamilton圈，这种修改的方法叫做改良圈算法。
 
 设初始圈$C=v_1v_2,\cdots,v_n$
 
