@@ -20,7 +20,7 @@ tspsol = prob.solve(solver="COPT")
 # tspsol = prob.solve(solver="GUROBI")
 
 tripsVar = np.array(np.round(trips.value), dtype=int)
-nodes = np.arange(0, 101)
+nodes = np.arange(0, num)
 tripsPos = np.argwhere(tripsVar)
 Gsol = nx.Graph()
 Gsol.add_nodes_from(nodes)

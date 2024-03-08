@@ -15,7 +15,7 @@ cons = [cp.sum(x, axis=0) - cp.diag(x) == 1,
 
 for i in range(1, num):
     for j in range(1, num):
-        cons.append(mu[i] - mu[j] + num * x[i, j] <= num - 1)
+        cons.append(mu[i] - mu[j] + (num - 1) * x[i, j] <= num - 2)
 
 obj = cp.Minimize(cp.sum(cp.multiply(x, dist)))
 prob = cp.Problem(objective=obj, constraints=cons)
